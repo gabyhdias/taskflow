@@ -14,4 +14,14 @@ if ($d[0] !== '') {
 $q = $pdo->prepare('INSERT INTO tarefas(titulo,descricao,responsavel,categoria,prazo,prioridade,status) VALUES(?,?,?,?,?,?,?)');
 $q->execute($d);
 header('Location: index.php');
+
+$q = $pdo->prepare(
+    'INSERT INTO tarefas
+    (titulo, descricao, responsavel, categoria, prazo, prioridade, status)
+    VALUES (?, ?, ?, ?, ?, ?, ?)'
+);
+
+$q->execute($d);
+
+header('Location: index.php');
 exit;
