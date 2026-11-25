@@ -4,7 +4,7 @@ $total = $pdo->query('SELECT COUNT(*) FROM tarefas')->fetchColumn();
 $andamento = $pdo->query("SELECT COUNT(*) FROM tarefas WHERE status='Em andamento'")->fetchColumn();
 $concluidas = $pdo->query("SELECT COUNT(*) FROM tarefas WHERE status='Concluído'")->fetchColumn(); 
 $abertos = $pdo->query("SELECT COUNT(*) FROM chamados WHERE status='Aberto'")->fetchColumn();
-$prioritarias = $pdo->query("SELECT COUNT(*) FROM tarefas WHERE prioridade IN ('Média','Alta')")->fetchColumn();
+$prioritarias = $pdo->query("SELECT COUNT(*) FROM tarefas WHERE prioridade IN ('Alta','Alta')")->fetchColumn();
 $recentes = $pdo->query('SELECT * FROM tarefas ORDER BY id DESC LIMIT 5')->fetchAll();
 require 'includes/header.php'; ?><div class="head">
     <div>
@@ -31,12 +31,16 @@ require 'includes/header.php'; ?><div class="head">
                 <th>Responsável</th>
                 <th>Prioridade</th>
                 <th>Status</th>
-            </tr><?php foreach ($recentes as $t): ?><tr>
-                    <td><?= htmlspecialchars($t['titulo']) ?></td>
-                    <td><?= htmlspecialchars($t['responsavel']) ?></td>
-                    <td><?= $t['prioridade'] ?></td>
-                    <td><?= $t['status'] ?></td>
-                </tr><?php endforeach; ?>
+         
+<?php foreach ($recentes as $t): ?>
+    <tr>
+        <td><?= htmlspecialchars($t['titulo']) ?></td>
+        <td><?= htmlspecialchars($t['responsavel']) ?></td>
+        <td><?= htmlspecialchars($t['prioridade']) ?></td>
+        <td><?= htmlspecialchars($t['status']) ?></td>
+    </tr>
+<?php endforeach; ?>
+
         </table>
     </div>
 </section>
